@@ -2,32 +2,46 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Recolección de Datos con Firebase</title>
+    <title>Registro de Empleados</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
   </head>
   <body>
-    <h1>Formulario de Registro</h1>
+    <h1>CRUD de Empleados</h1>
+
+    <h2>Registrar Empleado</h2>
     <form id="registro-form">
-      <label for="codigo">Código del Producto:</label>
-      <input type="text" id="codigo" required /><br /><br />
+      <label for="nombre">Nombre del Empleado:</label>
+      <input type="text" id="nombre" required /><br />
 
-      <label for="nombre">Nombre del Producto:</label>
-      <input type="text" id="nombre" required /><br /><br />
+      <label for="puesto">Puesto:</label>
+      <input type="text" id="puesto" required /><br />
 
-      <label for="precio">Precio del Producto:</label>
-      <input type="number" id="precio" step="0.01" required /><br /><br />
+      <label for="identificacion">Número de Identificación:</label>
+      <input type="text" id="identificacion" required /><br />
 
-      <label for="proveedor">Nombre del Proveedor:</label>
-      <input type="text" id="proveedor" required /><br /><br />
-
-      <label for="unidades">Número de Unidades:</label>
-      <input type="number" id="unidades" required /><br /><br />
-
-      <button type="submit">Guardar Producto</button>
+      <button type="submit">Guardar Empleado</button>
     </form>
 
+    <h2>Escaneo QR</h2>
+    <div id="qr-reader" style="width: 300px; height: 300px"></div>
+    <p id="qr-result">Resultado del QR: <span id="qr-content">Ninguno</span></p>
+
+    <h2>Lista de Empleados</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Puesto</th>
+          <th>ID</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="empleados-lista"></tbody>
+    </table>
+
+    <script src="qr-scanner.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
