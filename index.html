@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="qrcode.min.js"></script>
   </head>
   <body>
     <h1>CRUD de Empleados</h1>
@@ -25,8 +26,7 @@
     </form>
 
     <h2>Escaneo QR</h2>
-    <div id="qr-reader" style="width: 300px; height: 300px"></div>
-    <p id="qr-result">Resultado del QR: <span id="qr-content">Ninguno</span></p>
+    <img src="qrken.png" alt="Escanea este código QR para registrarte" />
 
     <h2>Lista de Empleados</h2>
     <table>
@@ -40,7 +40,6 @@
       </thead>
       <tbody id="empleados-lista"></tbody>
     </table>
-
     <script src="qr-scanner.js"></script>
     <script src="app.js"></script>
   </body>
