@@ -13,11 +13,11 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// Referencia al formulario y tabla
+// referencia al formulario y tabla
 const formulario = document.getElementById("registro-form");
 const listaEmpleados = document.getElementById("empleados-lista");
 
-// Crear empleado
+// crear empleado
 formulario.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -43,7 +43,7 @@ formulario.addEventListener("submit", (e) => {
     });
 });
 
-// Listar empleados
+// listar empleados
 function listarEmpleados() {
   listaEmpleados.innerHTML = "";
   db.collection("empleados")
@@ -68,7 +68,7 @@ function listarEmpleados() {
     });
 }
 
-// Editar empleado
+// editar empleado
 function editarEmpleado(id) {
   const nuevoNombre = prompt("Nuevo nombre:");
   const nuevoPuesto = prompt("Nuevo puesto:");
@@ -90,7 +90,7 @@ function editarEmpleado(id) {
     });
 }
 
-// Eliminar empleado
+// eliminar empleado
 function eliminarEmpleado(id) {
   if (confirm("¿Estás seguro de eliminar este empleado?")) {
     db.collection("empleados")
@@ -106,12 +106,12 @@ function eliminarEmpleado(id) {
   }
 }
 
-// Llamar al listado al cargar
+// llamar al listado al cargar
 listarEmpleados();
 
 async function consolidarEmpleados() {
   try {
-    // Obtén todos los empleados
+    // obtener todos los empleados
     const empleadosSnapshot = await db.collection("empleados").get();
     const empleados = empleadosSnapshot.docs.map((doc) => doc.data());
 
@@ -120,7 +120,7 @@ async function consolidarEmpleados() {
       return;
     }
 
-    // Consolidar empleados en un solo documento
+    // se consolidan los empleados en un solo documento
     await db.collection("empleadosConsolidados").doc("consolidado").set({
       empleados,
       fechaConsolidacion: new Date(),
