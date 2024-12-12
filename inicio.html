@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  </head>
+  <body>
+    <div id="intro">
+      <img src="Plasticos-FAR.png" alt="Imagen logo FAR" />
+    </div>
+    <h1>Inicio de Sesión</h1>
+    <form id="login-form">
+      <label for="email">Correo electrónico:</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Ingrese su correo"
+        required
+      /><br />
+
+      <label for="password">Contraseña:</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Ingrese su contraseña"
+        required
+      /><br />
+
+      <button type="submit">Iniciar Sesión</button>
+    </form>
+
+    <script>
+      // inicializar firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyDBaoqE5yYMLF25q6ZT14qYbf3BUUZUYME",
+        authDomain: "qr-ken.firebaseapp.com",
+        projectId: "qr-ken",
+        storageBucket: "qr-ken.firebasestorage.app",
+        messagingSenderId: "620527498344",
+        appId: "1:620527498344:web:5c0c17cdc47708eadeb7dd",
+        measurementId: "G-B9BXYL010N",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+
+      // Manejo del formulario
+      const loginForm = document.getElementById("login-form");
+
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        // Iniciar sesión con Firebase Auth
+        auth
+          .signInWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            alert("Inicio de sesión exitoso");
+            // Redirige a la página principal
+            window.location.href = "index.html";
+          })
+          .catch((error) => {
+            console.error("Error al iniciar sesión:", error.message);
+            alert("Correo o contraseña incorrectos.");
+          });
+      });
+    </script>
+    <script src="inicio.js"></script>
+  </body>
+</html>
