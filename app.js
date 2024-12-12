@@ -57,10 +57,7 @@ function listarEmpleados() {
             <td>${empleado.nombre}</td>
             <td>${empleado.puesto}</td>
             <td>${empleado.identificacion}</td>
-            <td>
-              <button onclick="editarEmpleado('${doc.id}')">Editar</button>
-              <button onclick="eliminarEmpleado('${doc.id}')">Eliminar</button>
-            </td>
+            
           </tr>
         `;
         listaEmpleados.innerHTML += fila;
