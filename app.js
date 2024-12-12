@@ -57,7 +57,10 @@ function listarEmpleados() {
             <td>${empleado.nombre}</td>
             <td>${empleado.puesto}</td>
             <td>${empleado.identificacion}</td>
-            
+            <td>
+              <button onclick="editarEmpleado('${doc.id}')">Editar</button>
+              <button onclick="eliminarEmpleado('${doc.id}')">Eliminar</button>
+            </td>
           </tr>
         `;
         listaEmpleados.innerHTML += fila;
@@ -105,3 +108,31 @@ function eliminarEmpleado(id) {
 
 // Llamar al listado al cargar
 listarEmpleados();
+
+async function consolidarEmpleados() {
+  try {
+    // Obtén todos los empleados
+    const empleadosSnapshot = await db.collection("empleados").get();
+    const empleados = empleadosSnapshot.docs.map((doc) => doc.data());
+
+    if (empleados.length === 0) {
+      alert("No hay empleados para consolidar.");
+      return;
+    }
+
+    // Consolidar empleados en un solo documento
+    await db.collection("empleadosConsolidados").doc("consolidado").set({
+      empleados,
+      fechaConsolidacion: new Date(),
+    });
+
+    alert("Empleados consolidados correctamente.");
+  } catch (error) {
+    console.error("Error al consolidar empleados: ", error);
+    alert("Error al consolidar empleados: " + error.message);
+  }
+}
+
+document
+  .getElementById("boton-consolidar")
+  .addEventListener("click", consolidarEmpleados);

@@ -126,3 +126,14 @@ tbody tr:nth-child(even) {
   height: auto;
   display: inline-block;
 }
+
+#far {
+  text-align: center;
+  margin: 20px auto;
+}
+
+img {
+  max-width: 500px;
+  height: auto;
+  display: inline-block;
+}

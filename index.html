@@ -25,7 +25,15 @@
       <input type="text" id="identificacion" required /><br />
 
       <button type="submit">Guardar empleado</button>
+      <button id="boton-consolidar">Consolidar Empleados</button>
     </form>
+
+    <h2>Escaneo QR</h2>
+    <img
+      src="frame.png"
+      id="far"
+      alt="Escanea este código QR para registrarte"
+    />
 
     <h2>Lista de empleados</h2>
     <table>
@@ -34,11 +42,13 @@
           <th>Nombre</th>
           <th>Puesto</th>
           <th>ID</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody id="empleados-lista"></tbody>
     </table>
     <script src="qr-scanner.js"></script>
     <script src="app.js"></script>
+    <script src="inicio.js"></script>
   </body>
 </html>
