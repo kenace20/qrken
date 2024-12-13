@@ -17,6 +17,11 @@ const db = firebase.firestore();
 const formulario = document.getElementById("registro-form");
 const listaEmpleados = document.getElementById("empleados-lista");
 
+//sanitizar
+function cleandata(userinput) {
+  return DOMPurify.sanitize(userinput);
+}
+
 // crear empleado
 formulario.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -52,18 +57,40 @@ function listarEmpleados() {
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         const empleado = doc.data();
-        const fila = `
-          <tr>
-            <td>${empleado.nombre}</td>
-            <td>${empleado.puesto}</td>
-            <td>${empleado.identificacion}</td>
-            <td>
-              <button onclick="editarEmpleado('${doc.id}')">Editar</button>
-              <button onclick="eliminarEmpleado('${doc.id}')">Eliminar</button>
-            </td>
-          </tr>
-        `;
-        listaEmpleados.innerHTML += fila;
+
+        // Crear fila
+        const fila = document.createElement("tr");
+
+        // Crear celdas sanitizadas
+        const celdaNombre = document.createElement("td");
+        celdaNombre.textContent = cleandata(empleado.nombre);
+        fila.appendChild(celdaNombre);
+
+        const celdaPuesto = document.createElement("td");
+        celdaPuesto.textContent = cleandata(empleado.puesto);
+        fila.appendChild(celdaPuesto);
+
+        const celdaIdentificacion = document.createElement("td");
+        celdaIdentificacion.textContent = cleandata(empleado.identificacion);
+        fila.appendChild(celdaIdentificacion);
+
+        // Crear celda con botones
+        const celdaAcciones = document.createElement("td");
+
+        const botonEditar = document.createElement("button");
+        botonEditar.textContent = "Editar";
+        botonEditar.onclick = () => editarEmpleado(doc.id);
+        celdaAcciones.appendChild(botonEditar);
+
+        const botonEliminar = document.createElement("button");
+        botonEliminar.textContent = "Eliminar";
+        botonEliminar.onclick = () => eliminarEmpleado(doc.id);
+        celdaAcciones.appendChild(botonEliminar);
+
+        fila.appendChild(celdaAcciones);
+
+        // Agregar fila a la tabla
+        listaEmpleados.appendChild(fila);
       });
     });
 }
